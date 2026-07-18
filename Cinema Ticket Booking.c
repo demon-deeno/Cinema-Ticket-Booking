@@ -7,6 +7,7 @@
 // Global array to track booked seats (1 = booked,0 = available)
 int booked_seats[MAX_SEATS + 1] = {0};
 
+// Prints the current seat layout, showing 'X' for booked seats and the seat number for available ones.
 void show_seat_layout(void)
 {
     int i, row;
@@ -25,6 +26,7 @@ void show_seat_layout(void)
     }
 }
 
+// Runs the main menu loop: books tickets, shows seat availability, or exits.
 int main()
 {
     int choice, tickets, price, total, category, start_seat;

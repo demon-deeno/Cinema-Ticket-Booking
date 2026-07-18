@@ -10,7 +10,6 @@ int booked_seats[MAX_SEATS + 1] = {0};
 void show_seat_layout(void)
 {
     int i, row;
-
     printf("\n--- Seat Layout ---\n");
     for (row = 1; row <= MAX_SEATS / SEATS_PER_ROW; row++) {
         printf("Row %d: ", row);
@@ -36,26 +35,30 @@ int main()
         printf("2. Show Available Seats\n");
         printf("3. Exit\n");
         printf("Enter your choice: ");
-        scanf("%d", &choice);
-
+        if (scanf("%d", &choice) != 1) {
+            while (getchar() != '\n');
+            printf("Invalid input! Please enter a number.\n");
+            continue;
+        }
         if (choice == 3) {
             printf("Thank you for visiting!\n");
             break;
         }
-
         if (choice == 2) {
             show_seat_layout();
             continue;
         }
-
         if (choice != 1) {
             printf("Invalid choice! Please choose again.\n");
             continue;
         }
 
         printf("Enter the number of tickets you want to book: ");
-        scanf("%d", &tickets);
-
+        if (scanf("%d", &tickets) != 1) {
+            while (getchar() != '\n');
+            printf("Invalid input! Please enter a number.\n");
+            continue;
+        }
         if (tickets <= 0 || tickets > MAX_SEATS) {
             printf("Invalid number of tickets! Please enter a value between 1 and %d.\n", MAX_SEATS);
             continue;
@@ -66,16 +69,21 @@ int main()
         printf("2. Premium - Rs. 250 per ticket\n");
         printf("3. VIP - Rs. 350 per ticket\n");
         printf("Enter your choice (1-3): ");
-        scanf("%d", &category);
-
+        if (scanf("%d", &category) != 1) {
+            while (getchar() != '\n');
+            printf("Invalid input! Please enter a number.\n");
+            continue;
+        }
         printf("Enter starting seat number: ");
-        scanf("%d", &start_seat);
-
+        if (scanf("%d", &start_seat) != 1) {
+            while (getchar() != '\n');
+            printf("Invalid input! Please enter a number.\n");
+            continue;
+        }
         if (start_seat < 1 || start_seat > MAX_SEATS) {
             printf("Invalid seat number! Available seats are 1 to %d\n", MAX_SEATS);
             continue;
         }
-
         if (start_seat + tickets - 1 > MAX_SEATS) {
             printf("Not enough seats available! You can book maximum %d seats from seat %d\n", MAX_SEATS - start_seat + 1, start_seat);
             continue;
@@ -99,7 +107,6 @@ int main()
                 break;
             }
         }
-
         if (seats_available == 0) {
             printf("\n--- BOOKING FAILED ---\n");
             printf("Sorry! Seats are already booked in the range %d to %d\n", start_seat, start_seat + tickets - 1);
@@ -110,7 +117,6 @@ int main()
         for (i = start_seat; i < start_seat + tickets; i++) {
             booked_seats[i] = 1;
         }
-
         total = tickets * price;
 
         printf("\n--- Ticket Booking Successful ---\n");
@@ -124,13 +130,11 @@ int main()
             printf("VIP\n");
         printf("Price per ticket: Rs. %d\n", price);
         printf("\n--- Seat Details ---\n");
-
         for (i = start_seat; i < start_seat + tickets; i++) {
             int row_num = (i - 1) / SEATS_PER_ROW + 1;
             int seat_in_row = (i - 1) % SEATS_PER_ROW + 1;
             printf("Seat %d -> Row %d, Position %d\n", i, row_num, seat_in_row);
         }
-
         printf("\nTotal amount to be paid: Rs. %d\n", total);
         printf("Booking Confirmed!\n");
         show_seat_layout();
@@ -138,5 +142,3 @@ int main()
 
     return 0;
 }
-
-

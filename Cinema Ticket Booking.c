@@ -4,7 +4,7 @@
 #define MAX_SEATS 30
 #define SEATS_PER_ROW 5
 
-// Global array to track booked seats (1 = booked, 0 = available)
+// Global array to track booked seats (1 = booked,0 = available)
 int booked_seats[MAX_SEATS + 1] = {0};
 
 void show_seat_layout(void)

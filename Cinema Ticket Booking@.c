@@ -68,6 +68,17 @@ int main()
         printf("Enter your choice (1-3): ");
         scanf("%d", &category);
 
+        if (category == 1)
+            price = 150;
+        else if (category == 2)
+            price = 250;
+        else if (category == 3)
+            price = 350;
+        else {
+            printf("Invalid choice!\n");
+            continue;
+        }
+
         printf("Enter starting seat number: ");
         scanf("%d", &start_seat);
 
@@ -78,17 +89,6 @@ int main()
 
         if (start_seat + tickets - 1 > MAX_SEATS) {
             printf("Not enough seats available! You can book maximum %d seats from seat %d\n", MAX_SEATS - start_seat + 1, start_seat);
-            continue;
-        }
-
-        if (category == 1)
-            price = 150;
-        else if (category == 2)
-            price = 250;
-        else if (category == 3)
-            price = 350;
-        else {
-            printf("Invalid choice!\n");
             continue;
         }
 
